@@ -2,17 +2,17 @@
 
 [![License](https://img.shields.io/hexpm/l/plug.svg)]()
 
-Android MVC Sample.
+Android MVP Sample.
 
 ## Sample list
 
-- Java : [branch : 01-MVC](https://github.com/taehwandev/AndroidMVPSample/tree/01-mvc/app_java)
-- Kotlin : [branch : 01-MVC](https://github.com/taehwandev/AndroidMVPSample/tree/01-mvc/app_kotlin)
+- Java : [branch : 02-MVP-Intro](https://github.com/taehwandev/AndroidMVPSample/tree/02-MVP-Intro/app_java)
+- Kotlin : [branch : 02-MVP-Intro](https://github.com/taehwandev/AndroidMVPSample/tree/02-MVP-Intro/app_kotlin)
 
 ## Blog post
 
 한국어 자료
-- [안드로이드 MVP 무작정 따라하기 - MVC 살펴보기]()
+- [Android MVP 무작정 따라하기 - Presenter 분리하기](http://thdev.tech/androiddev/2016/12/23/Android-MVP-Three.html)
 
 ## License
 
