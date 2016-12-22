@@ -11,17 +11,24 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import java.util.ArrayList;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import tech.thdev.android_mvp_sample.adapter.ImageAdapter;
+import tech.thdev.android_mvp_sample.data.ImageItem;
 import tech.thdev.android_mvp_sample.data.SampleImageData;
+import tech.thdev.android_mvp_sample.presenter.MainContract;
+import tech.thdev.android_mvp_sample.presenter.MainPresenter;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements MainContract.View {
 
     @BindView(R.id.recycler_view)
     RecyclerView recyclerView;
 
     private ImageAdapter imageAdapter;
+
+    private MainPresenter mainPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,14 +37,19 @@ public class MainActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
+        mainPresenter = new MainPresenter();
+        mainPresenter.attachView(this);
+        mainPresenter.setSampleImageData(SampleImageData.getInstance());
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         imageAdapter = new ImageAdapter(this);
-        imageAdapter.setImageItems(SampleImageData.getInstance().getImages(this, 10));
         recyclerView.setAdapter(imageAdapter);
+
+        mainPresenter.loadItems(this, false);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -47,6 +59,13 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        mainPresenter.detachView();
     }
 
     @Override
@@ -65,12 +84,23 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_reload) {
-            imageAdapter.clear();
-            imageAdapter.setImageItems(SampleImageData.getInstance().getImages(this, 10));
-            imageAdapter.notifyDataSetChanged();
+            mainPresenter.loadItems(this, true);
             return true;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void addItems(ArrayList<ImageItem> items, boolean isClear) {
+        if (isClear) {
+            imageAdapter.clear();
+        }
+        imageAdapter.setImageItems(items);
+    }
+
+    @Override
+    public void notifyAdapter() {
+        imageAdapter.notifyDataSetChanged();
     }
 }
