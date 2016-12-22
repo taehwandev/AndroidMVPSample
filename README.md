@@ -12,7 +12,7 @@ Android MVC Sample.
 ## Blog post
 
 한국어 자료
-- [안드로이드 MVP 무작정 따라하기 - MVC 살펴보기]()
+- [Android MVP 무작정 따라하기 - MVC 구조 이해하기](http://thdev.tech/androiddev/2016/10/23/Android-MVC-Architecture.html)
 
 ## License
 
