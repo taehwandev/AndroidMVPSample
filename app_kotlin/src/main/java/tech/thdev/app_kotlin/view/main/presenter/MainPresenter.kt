@@ -1,4 +1,4 @@
-package tech.thdev.app_kotlin.presenter
+package tech.thdev.app_kotlin.view.main.presenter
 
 import android.content.Context
 import tech.thdev.app_kotlin.data.ImageData

@@ -1,4 +1,4 @@
-package tech.thdev.app_kotlin.presenter
+package tech.thdev.app_kotlin.view.main.presenter
 
 import android.content.Context
 import tech.thdev.app_kotlin.data.ImageData
@@ -18,7 +18,7 @@ interface MainContract {
     }
 
     interface Presenter {
-        var view: View
+        var view: MainContract.View
         var imageData: ImageData
 
         fun loadItems(context: Context, isClear: Boolean)

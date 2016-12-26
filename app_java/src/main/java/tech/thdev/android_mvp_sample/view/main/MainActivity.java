@@ -1,4 +1,4 @@
-package tech.thdev.android_mvp_sample;
+package tech.thdev.android_mvp_sample.view.main;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -15,11 +15,12 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import tech.thdev.android_mvp_sample.R;
 import tech.thdev.android_mvp_sample.adapter.ImageAdapter;
 import tech.thdev.android_mvp_sample.data.ImageItem;
 import tech.thdev.android_mvp_sample.data.SampleImageData;
-import tech.thdev.android_mvp_sample.presenter.MainContract;
-import tech.thdev.android_mvp_sample.presenter.MainPresenter;
+import tech.thdev.android_mvp_sample.view.main.presenter.MainContract;
+import tech.thdev.android_mvp_sample.view.main.presenter.MainPresenter;
 
 public class MainActivity extends AppCompatActivity implements MainContract.View {
 

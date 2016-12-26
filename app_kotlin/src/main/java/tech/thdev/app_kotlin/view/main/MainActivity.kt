@@ -1,4 +1,4 @@
-package tech.thdev.app_kotlin
+package tech.thdev.app_kotlin.view.main
 
 import android.os.Bundle
 import android.support.design.widget.FloatingActionButton
@@ -8,11 +8,12 @@ import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
+import tech.thdev.app_kotlin.R
 import tech.thdev.app_kotlin.adapter.ImageAdapter
 import tech.thdev.app_kotlin.data.ImageData
 import tech.thdev.app_kotlin.data.ImageItem
-import tech.thdev.app_kotlin.presenter.MainContract
-import tech.thdev.app_kotlin.presenter.MainPresenter
+import tech.thdev.app_kotlin.view.main.presenter.MainContract
+import tech.thdev.app_kotlin.view.main.presenter.MainPresenter
 import java.util.*
 
 class MainActivity : AppCompatActivity(), MainContract.View {

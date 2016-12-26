@@ -1,4 +1,4 @@
-package tech.thdev.android_mvp_sample.presenter;
+package tech.thdev.android_mvp_sample.view.main.presenter;
 
 import android.content.Context;
 
