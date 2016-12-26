@@ -1,4 +1,4 @@
-# Android MVC Sample
+# Android MVP Sample
 
 [![License](https://img.shields.io/hexpm/l/plug.svg)]()
 
