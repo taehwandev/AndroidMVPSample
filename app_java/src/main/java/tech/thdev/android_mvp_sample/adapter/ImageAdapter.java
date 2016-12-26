@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 
 import java.util.ArrayList;
 
+import tech.thdev.android_mvp_sample.adapter.contract.ImageAdapterContract;
 import tech.thdev.android_mvp_sample.adapter.holder.ImageViewHolder;
 import tech.thdev.android_mvp_sample.data.ImageItem;
 import tech.thdev.android_mvp_sample.listener.OnItemClickListener;
@@ -14,7 +15,7 @@ import tech.thdev.android_mvp_sample.listener.OnItemClickListener;
  * Created by tae-hwan on 10/23/16.
  */
 
-public class ImageAdapter extends RecyclerView.Adapter<ImageViewHolder> {
+public class ImageAdapter extends RecyclerView.Adapter<ImageViewHolder> implements ImageAdapterContract.Model, ImageAdapterContract.View {
 
     private Context context;
     private OnItemClickListener onItemClickListener;
@@ -25,19 +26,25 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageViewHolder> {
         this.context = context;
     }
 
-    public void setImageItems(ArrayList<ImageItem> imageItems) {
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
+    }
+
+    @Override
+    public void addItems(ArrayList<ImageItem> imageItems) {
         this.imageItems = imageItems;
     }
 
-    public void clear() {
+    @Override
+    public void clearItem() {
         if (imageItems != null) {
             imageItems.clear();
-            imageItems = null;
         }
     }
 
-    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
-        this.onItemClickListener = onItemClickListener;
+    @Override
+    public void notifyAdapter() {
+        notifyDataSetChanged();
     }
 
     @Override

@@ -11,10 +11,8 @@ import android.view.MenuItem
 import tech.thdev.app_kotlin.R
 import tech.thdev.app_kotlin.adapter.ImageAdapter
 import tech.thdev.app_kotlin.data.ImageData
-import tech.thdev.app_kotlin.data.ImageItem
 import tech.thdev.app_kotlin.view.main.presenter.MainContract
 import tech.thdev.app_kotlin.view.main.presenter.MainPresenter
-import java.util.*
 
 class MainActivity : AppCompatActivity(), MainContract.View {
 
@@ -22,7 +20,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         findViewById(R.id.recycler_view) as RecyclerView
     }
 
-    private var imageAdapter: ImageAdapter? = null
+    private lateinit var imageAdapter: ImageAdapter
 
     private lateinit var presenter: MainPresenter
 
@@ -32,13 +30,15 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         val toolbar = findViewById(R.id.toolbar) as Toolbar
         setSupportActionBar(toolbar)
 
+        imageAdapter = ImageAdapter(this)
+        recyclerView.adapter = imageAdapter
+
         presenter = MainPresenter().apply {
             view = this@MainActivity
             imageData = ImageData
+            adapterModel = imageAdapter
+            adapterView = imageAdapter
         }
-
-        imageAdapter = ImageAdapter(this)
-        recyclerView.adapter = imageAdapter
 
         val fab = findViewById(R.id.fab) as FloatingActionButton
         fab.setOnClickListener { view -> Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show() }
@@ -65,18 +65,5 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         }
 
         return super.onOptionsItemSelected(item)
-    }
-
-    override fun updateItems(items: ArrayList<ImageItem>, isClear: Boolean) {
-        imageAdapter?.apply {
-            if (isClear) {
-                imageList?.clear()
-            }
-            imageList = items
-        }
-    }
-
-    override fun notifyAdapter() {
-        imageAdapter?.notifyDataSetChanged()
     }
 }
