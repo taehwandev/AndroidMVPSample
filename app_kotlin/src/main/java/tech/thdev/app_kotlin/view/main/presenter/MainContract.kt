@@ -10,14 +10,17 @@ import tech.thdev.app_kotlin.data.ImageData
 
 interface MainContract {
 
-    interface View
+    interface View {
+
+        fun  showToast(title: String)
+    }
 
     interface Presenter {
         var view: MainContract.View
         var imageData: ImageData
 
         var adapterModel: ImageAdapterContract.Model
-        var adapterView: ImageAdapterContract.View
+        var adapterView: ImageAdapterContract.View?
 
         fun loadItems(context: Context, isClear: Boolean)
     }

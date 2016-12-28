@@ -8,13 +8,12 @@ import android.widget.ImageView
 import android.widget.TextView
 import tech.thdev.app_kotlin.R
 import tech.thdev.app_kotlin.data.ImageItem
-import tech.thdev.app_kotlin.listener.OnItemClickListener
 import tech.thdev.app_kotlin.util.ImageAsync
 
 /**
  * Created by tae-hwan on 10/23/16.
  */
-class ImageViewHolder(val context: Context, parent: ViewGroup?, val onItemClickListener: OnItemClickListener?)
+class ImageViewHolder(val context: Context, parent: ViewGroup?, val listenerFunc: ((Int) -> Unit)?)
     : RecyclerView.ViewHolder(LayoutInflater.from(context).inflate(R.layout.item_image, parent, false)) {
 
     val imageView by lazy {
@@ -30,7 +29,7 @@ class ImageViewHolder(val context: Context, parent: ViewGroup?, val onItemClickL
         textView.text = item.title
 
         itemView.setOnClickListener {
-            onItemClickListener?.onItemClick(position)
+            listenerFunc?.invoke(position)
         }
     }
 }

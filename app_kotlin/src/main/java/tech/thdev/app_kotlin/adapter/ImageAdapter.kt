@@ -5,7 +5,6 @@ import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
 import tech.thdev.app_kotlin.adapter.contract.ImageAdapterContract
 import tech.thdev.app_kotlin.data.ImageItem
-import tech.thdev.app_kotlin.listener.OnItemClickListener
 import java.util.*
 
 /**
@@ -15,7 +14,7 @@ class ImageAdapter(val context: Context) : ImageAdapterContract.View, RecyclerVi
 
     private lateinit var imageList: ArrayList<ImageItem>
 
-    var onItemClickListener: OnItemClickListener? = null
+    override var onClickFunc: ((Int) -> Unit)? = null
 
     override fun onBindViewHolder(holder: ImageViewHolder?, position: Int) {
         imageList[position].let {
@@ -24,13 +23,15 @@ class ImageAdapter(val context: Context) : ImageAdapterContract.View, RecyclerVi
     }
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int)
-            = ImageViewHolder(context, parent, onItemClickListener)
+            = ImageViewHolder(context, parent, onClickFunc)
 
     override fun getItemCount() = imageList.size
 
     override fun notifyAdapter() {
         notifyDataSetChanged()
     }
+
+    override fun getItem(position: Int) = imageList[position]
 
     override fun addItems(imageItems: ArrayList<ImageItem>) {
         this.imageList = imageItems
