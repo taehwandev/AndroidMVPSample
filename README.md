@@ -6,13 +6,13 @@ Android MVP Sample.
 
 ## Sample list
 
-- Java : [branch : 03-MVP-AdapterContract](https://github.com/taehwandev/AndroidMVPSample/tree/03-MVP-AdapterContract/app_java)
-- Kotlin : [branch : 03-MVP-AdapterContract](https://github.com/taehwandev/AndroidMVPSample/tree/03-MVP-AdapterContract/app_kotlin)
+- Java : [branch : 04-MVP-Adapter_View](https://github.com/taehwandev/AndroidMVPSample/tree/04-MVP-Adapter_View/app_java)
+- Kotlin : [branch : 04-MVP-Adapter_View](https://github.com/taehwandev/AndroidMVPSample/tree/04-MVP-Adapter_View/app_kotlin)
 
 ## Blog post
 
 한국어 자료
-- [Android MVP 무작정 따라하기 - Adapter Contract 정의하기 2번째(동영상)](http://thdev.tech/androiddev/2016/12/27/Android-MVP-Four-Two.html)
+- [Android MVP 무작정 따라하기 - Adapter OnClick 정의하기(동영상)](http://thdev.tech/androiddev/2016/12/27/Android-MVP-Four-Three.html)
 
 ## License
 
