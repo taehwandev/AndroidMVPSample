@@ -26,10 +26,6 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageViewHolder> implemen
         this.context = context;
     }
 
-    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
-        this.onItemClickListener = onItemClickListener;
-    }
-
     @Override
     public void addItems(ArrayList<ImageItem> imageItems) {
         this.imageItems = imageItems;
@@ -58,8 +54,18 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageViewHolder> implemen
     }
 
     @Override
+    public void setOnClickListener(OnItemClickListener clickListener) {
+        this.onItemClickListener = clickListener;
+    }
+
+    @Override
+    public ImageItem getItem(int position) {
+        return imageItems.get(position);
+    }
+
+    @Override
     public void onBindViewHolder(final ImageViewHolder holder, int position) {
         if (holder == null) return;
-        holder.onBind(imageItems.get(position), position);
+        holder.onBind(getItem(position), position);
     }
 }

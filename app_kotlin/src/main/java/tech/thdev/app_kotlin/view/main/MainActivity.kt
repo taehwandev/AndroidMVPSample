@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import tech.thdev.app_kotlin.R
 import tech.thdev.app_kotlin.adapter.ImageAdapter
 import tech.thdev.app_kotlin.data.ImageData
@@ -65,5 +66,9 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         }
 
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun showToast(title: String) {
+        Toast.makeText(this, "OnClick Item $title", Toast.LENGTH_SHORT).show()
     }
 }

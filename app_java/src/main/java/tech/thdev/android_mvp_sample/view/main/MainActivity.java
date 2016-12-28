@@ -10,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -59,6 +60,11 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
                         .setAction("Action", null).show();
             }
         });
+    }
+
+    @Override
+    public void showToast(String title) {
+        Toast.makeText(this, title, Toast.LENGTH_SHORT).show();
     }
 
     @Override

@@ -9,7 +9,7 @@ buildscript {
 
         supportLibraryVersion = '25.1.0'
 
-        kotlin_version = '1.0.5-3'
+        kotlin_version = '1.0.6'
 
         // Bind view
         butterKnifeVersion = '8.4.0'
