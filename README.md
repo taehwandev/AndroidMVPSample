@@ -12,7 +12,7 @@ Android MVP Sample.
 ## Blog post
 
 한국어 자료
-- [Android MVP 무작정 따라하기 - Adapter OnClick 정의하기(동영상)](http://thdev.tech/androiddev/2016/12/27/Android-MVP-Four-Three.html)
+- [Android MVP 무작정 따라하기 - Adapter OnClick 정의하기(동영상)](http://thdev.tech/androiddev/2016/12/29/Android-MVP-Four-Three.html)
 
 ## License
 
