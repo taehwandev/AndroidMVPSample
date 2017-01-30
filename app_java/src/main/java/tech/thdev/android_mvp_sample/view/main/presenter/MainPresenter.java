@@ -6,7 +6,8 @@ import java.util.ArrayList;
 
 import tech.thdev.android_mvp_sample.adapter.contract.ImageAdapterContract;
 import tech.thdev.android_mvp_sample.data.ImageItem;
-import tech.thdev.android_mvp_sample.data.SampleImageData;
+import tech.thdev.android_mvp_sample.data.source.image.SampleImageRepository;
+import tech.thdev.android_mvp_sample.data.source.image.SampleImageSource;
 import tech.thdev.android_mvp_sample.listener.OnItemClickListener;
 
 /**
@@ -20,7 +21,7 @@ public class MainPresenter implements MainContract.Presenter, OnItemClickListene
     private ImageAdapterContract.Model adapterModel;
     private ImageAdapterContract.View adapterView;
 
-    private SampleImageData sampleImageData;
+    private SampleImageRepository sampleImageData;
 
     @Override
     public void attachView(MainContract.View view) {
@@ -33,18 +34,26 @@ public class MainPresenter implements MainContract.Presenter, OnItemClickListene
     }
 
     @Override
-    public void setSampleImageData(SampleImageData sampleImageData) {
+    public void setSampleImageData(SampleImageRepository sampleImageData) {
         this.sampleImageData = sampleImageData;
     }
 
     @Override
-    public void loadItems(Context context, boolean isClear) {
-        ArrayList<ImageItem> items = sampleImageData.getImages(context, 10);
-        if (isClear) {
-            adapterModel.clearItem();
-        }
-        adapterModel.addItems(items);
-        adapterView.notifyAdapter();
+    public void loadItems(Context context, final boolean isClear) {
+        sampleImageData.getImages(context, 10, new SampleImageSource.LoadImageCallback() {
+            @Override
+            public void onImageLoaded(ArrayList<ImageItem> list) {
+                if (list != null) {
+                    if (isClear) {
+                        adapterModel.clearItem();
+                    }
+                    adapterModel.addItems(list);
+                    adapterView.notifyAdapter();
+                }
+            }
+        });
+
+
     }
 
     @Override

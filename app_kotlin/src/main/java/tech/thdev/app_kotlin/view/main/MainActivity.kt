@@ -11,7 +11,7 @@ import android.view.MenuItem
 import android.widget.Toast
 import tech.thdev.app_kotlin.R
 import tech.thdev.app_kotlin.adapter.ImageAdapter
-import tech.thdev.app_kotlin.data.ImageData
+import tech.thdev.app_kotlin.data.source.image.SampleImageRepository
 import tech.thdev.app_kotlin.view.main.presenter.MainContract
 import tech.thdev.app_kotlin.view.main.presenter.MainPresenter
 
@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
 
         presenter = MainPresenter().apply {
             view = this@MainActivity
-            imageData = ImageData
+            imageData = SampleImageRepository
             adapterModel = imageAdapter
             adapterView = imageAdapter
         }

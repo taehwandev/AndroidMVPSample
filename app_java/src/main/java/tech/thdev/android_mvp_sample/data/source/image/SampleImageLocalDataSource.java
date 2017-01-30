@@ -1,29 +1,19 @@
-package tech.thdev.android_mvp_sample.data;
+package tech.thdev.android_mvp_sample.data.source.image;
 
 import android.content.Context;
 
 import java.util.ArrayList;
 
+import tech.thdev.android_mvp_sample.data.ImageItem;
+
 /**
- * Created by tae-hwan on 10/23/16.
+ * Created by tae-hwan on 1/30/17.
  */
 
-public class SampleImageData {
+public class SampleImageLocalDataSource implements SampleImageSource {
 
-    private SampleImageData() {
-
-    }
-
-    private static SampleImageData sampleImageData;
-
-    public static SampleImageData getInstance() {
-        if (sampleImageData == null) {
-            sampleImageData = new SampleImageData();
-        }
-        return sampleImageData;
-    }
-
-    public ArrayList<ImageItem> getImages(Context context, int size) {
+    @Override
+    public void getImages(Context context, int size, LoadImageCallback loadImageCallback) {
         ArrayList<ImageItem> items = new ArrayList<>();
 
         for (int i = 0; i < size; i++) {
@@ -33,6 +23,8 @@ public class SampleImageData {
             items.add(new ImageItem(resource, name));
         }
 
-        return items;
+        if (loadImageCallback != null) {
+            loadImageCallback.onImageLoaded(items);
+        }
     }
 }
