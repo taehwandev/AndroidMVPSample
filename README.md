@@ -6,13 +6,13 @@ Android MVP Sample.
 
 ## Sample list
 
-- Java : [branch : 04-MVP-Adapter_View](https://github.com/taehwandev/AndroidMVPSample/tree/04-MVP-Adapter_View/app_java)
-- Kotlin : [branch : 04-MVP-Adapter_View](https://github.com/taehwandev/AndroidMVPSample/tree/04-MVP-Adapter_View/app_kotlin)
+- Java : [branch : 05-MVP-Model](https://github.com/taehwandev/AndroidMVPSample/tree/05-MVP-Model/app_java)
+- Kotlin : [branch : 05-MVP-Model](https://github.com/taehwandev/AndroidMVPSample/tree/05-MVP-Model/app_kotlin)
 
 ## Blog post
 
 한국어 자료
-- [Android MVP 무작정 따라하기 - Adapter OnClick 정의하기(동영상)](http://thdev.tech/androiddev/2016/12/29/Android-MVP-Four-Three.html)
+- [Android MVP 무작정 따라하기 - Google Architecture Model(영상 포함)](http://thdev.tech/androiddev/2017/01/29/Android-MVP-Google-Architecture-Model.html)
 
 ## License
 

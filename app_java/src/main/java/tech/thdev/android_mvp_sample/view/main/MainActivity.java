@@ -16,7 +16,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import tech.thdev.android_mvp_sample.R;
 import tech.thdev.android_mvp_sample.adapter.ImageAdapter;
-import tech.thdev.android_mvp_sample.data.SampleImageData;
+import tech.thdev.android_mvp_sample.data.source.image.SampleImageRepository;
 import tech.thdev.android_mvp_sample.view.main.presenter.MainContract;
 import tech.thdev.android_mvp_sample.view.main.presenter.MainPresenter;
 
@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
         mainPresenter.attachView(this);
         mainPresenter.setImageAdapterModel(imageAdapter);
         mainPresenter.setImageAdapterView(imageAdapter);
-        mainPresenter.setSampleImageData(SampleImageData.getInstance());
+        mainPresenter.setSampleImageData(SampleImageRepository.getInstance());
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
