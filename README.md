@@ -17,7 +17,7 @@ Android MVP Sample.
 ## License
 
 ```
-Copyright 2016 Tae-hwan
+Copyright 2017 Tae-hwan
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
