@@ -12,7 +12,7 @@ Android MVP Sample.
 ## Blog post
 
 한국어 자료
-- [Android MVP 무작정 따라하기 - Google Architecture Model(영상 포함)](http://thdev.tech/androiddev/2017/01/09/Android-MVP-Google-Architecture-Model.html)
+- [Android MVP 무작정 따라하기 - Google Architecture Model(영상 포함)](http://thdev.tech/androiddev/2017/01/29/Android-MVP-Google-Architecture-Model.html)
 
 ## License
 
