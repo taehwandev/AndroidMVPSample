@@ -1,4 +1,4 @@
-package tech.thdev.app_kotlin
+package tech.thdev.app_kotlin.view.main
 
 import android.os.Bundle
 import android.support.design.widget.FloatingActionButton
@@ -8,16 +8,22 @@ import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
+import tech.thdev.app_kotlin.R
 import tech.thdev.app_kotlin.adapter.ImageAdapter
-import tech.thdev.app_kotlin.data.ImageData
+import tech.thdev.app_kotlin.data.source.image.SampleImageRepository
+import tech.thdev.app_kotlin.view.main.presenter.MainContract
+import tech.thdev.app_kotlin.view.main.presenter.MainPresenter
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), MainContract.View {
 
     private val recyclerView by lazy {
         findViewById(R.id.recycler_view) as RecyclerView
     }
 
-    private var imageAdapter: ImageAdapter? = null
+    private lateinit var imageAdapter: ImageAdapter
+
+    private lateinit var presenter: MainPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,12 +32,19 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
         imageAdapter = ImageAdapter(this)
-        imageAdapter?.imageList = ImageData.getSampleList(this, 10)
-
         recyclerView.adapter = imageAdapter
+
+        presenter = MainPresenter().apply {
+            view = this@MainActivity
+            imageData = SampleImageRepository
+            adapterModel = imageAdapter
+            adapterView = imageAdapter
+        }
 
         val fab = findViewById(R.id.fab) as FloatingActionButton
         fab.setOnClickListener { view -> Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show() }
+
+        presenter.loadItems(this, false)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -48,14 +61,14 @@ class MainActivity : AppCompatActivity() {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_reload) {
-            imageAdapter?.apply {
-                imageList?.clear()
-                imageList = ImageData.getSampleList(baseContext, 10)
-                notifyDataSetChanged()
-            }
+            presenter.loadItems(this, true)
             return true
         }
 
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun showToast(title: String) {
+        Toast.makeText(this, "OnClick Item $title", Toast.LENGTH_SHORT).show()
     }
 }

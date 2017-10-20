@@ -1,4 +1,4 @@
-package tech.thdev.android_mvp_sample;
+package tech.thdev.android_mvp_sample.view.main;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -10,18 +10,24 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import tech.thdev.android_mvp_sample.R;
 import tech.thdev.android_mvp_sample.adapter.ImageAdapter;
-import tech.thdev.android_mvp_sample.data.SampleImageData;
+import tech.thdev.android_mvp_sample.data.source.image.SampleImageRepository;
+import tech.thdev.android_mvp_sample.view.main.presenter.MainContract;
+import tech.thdev.android_mvp_sample.view.main.presenter.MainPresenter;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements MainContract.View {
 
     @BindView(R.id.recycler_view)
     RecyclerView recyclerView;
 
     private ImageAdapter imageAdapter;
+
+    private MainPresenter mainPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,14 +36,21 @@ public class MainActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
+        imageAdapter = new ImageAdapter(this);
+        recyclerView.setAdapter(imageAdapter);
+
+        mainPresenter = new MainPresenter();
+        mainPresenter.attachView(this);
+        mainPresenter.setImageAdapterModel(imageAdapter);
+        mainPresenter.setImageAdapterView(imageAdapter);
+        mainPresenter.setSampleImageData(SampleImageRepository.getInstance());
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        imageAdapter = new ImageAdapter(this);
-        imageAdapter.setImageItems(SampleImageData.getInstance().getImages(this, 10));
-        recyclerView.setAdapter(imageAdapter);
+        mainPresenter.loadItems(this, false);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -47,6 +60,18 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+    }
+
+    @Override
+    public void showToast(String title) {
+        Toast.makeText(this, title, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        mainPresenter.detachView();
     }
 
     @Override
@@ -65,9 +90,7 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_reload) {
-            imageAdapter.clear();
-            imageAdapter.setImageItems(SampleImageData.getInstance().getImages(this, 10));
-            imageAdapter.notifyDataSetChanged();
+            mainPresenter.loadItems(this, true);
             return true;
         }
 

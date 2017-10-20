@@ -1,64 +1,43 @@
 package tech.thdev.app_kotlin.adapter
 
 import android.content.Context
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.os.AsyncTask
 import android.support.v7.widget.RecyclerView
-import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.Toast
-import tech.thdev.app_kotlin.R
+import tech.thdev.app_kotlin.adapter.contract.ImageAdapterContract
 import tech.thdev.app_kotlin.data.ImageItem
-import java.lang.ref.WeakReference
 import java.util.*
 
 /**
  * Created by tae-hwan on 10/23/16.
  */
-class ImageAdapter(val context: Context) : RecyclerView.Adapter<ImageViewHolder>() {
+class ImageAdapter(val context: Context) : ImageAdapterContract.View, RecyclerView.Adapter<ImageViewHolder>(), ImageAdapterContract.Model {
 
-    var imageList: ArrayList<ImageItem>? = null
+    private lateinit var imageList: ArrayList<ImageItem>
+
+    override var onClickFunc: ((Int) -> Unit)? = null
 
     override fun onBindViewHolder(holder: ImageViewHolder?, position: Int) {
-        val item = imageList?.get(position)
-
-        ImageAsync(holder?.imageView).execute(item?.resource)
-        holder?.textView?.text = item?.title
-
-        holder?.itemView?.setOnClickListener {
-            Toast.makeText(context, "Show ${item?.title}", Toast.LENGTH_SHORT).show()
+        imageList[position].let {
+            holder?.onBind(it, position)
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int)
-            = ImageViewHolder(LayoutInflater.from(context).inflate(R.layout.item_image, parent, false))
+            = ImageViewHolder(context, parent, onClickFunc)
 
-    override fun getItemCount() = imageList?.size ?: 0
+    override fun getItemCount() = imageList.size
 
-    inner class ImageAsync(imageView: ImageView?) : AsyncTask<Int, Void, Bitmap>() {
+    override fun notifyAdapter() {
+        notifyDataSetChanged()
+    }
 
-        val imageViewReference: WeakReference<ImageView?>
+    override fun getItem(position: Int) = imageList[position]
 
-        init {
-            imageViewReference = WeakReference(imageView)
-        }
+    override fun addItems(imageItems: ArrayList<ImageItem>) {
+        this.imageList = imageItems
+    }
 
-        override fun doInBackground(vararg params: Int?): Bitmap? {
-            val options = BitmapFactory.Options()
-            options.inSampleSize = 2
-            return BitmapFactory.decodeResource(context.resources, params[0] as Int, options)
-        }
-
-        override fun onPreExecute() {
-            super.onPreExecute()
-            imageViewReference.get()?.setImageResource(0)
-        }
-
-        override fun onPostExecute(result: Bitmap?) {
-            super.onPostExecute(result)
-            result?.let { imageViewReference.get()?.setImageBitmap(result) }
-        }
+    override fun clearItem() {
+        imageList.clear()
     }
 }
