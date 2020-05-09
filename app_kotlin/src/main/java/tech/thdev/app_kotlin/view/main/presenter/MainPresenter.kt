@@ -7,14 +7,12 @@ import tech.thdev.app_kotlin.data.ImageData
 /**
  * Created by tae-hwan on 12/23/16.
  */
-
-class MainPresenter : MainContract.Presenter {
-
-    lateinit override var view: MainContract.View
-    lateinit override var imageData: ImageData
-
-    lateinit override var adapterModel: ImageAdapterContract.Model
-    lateinit override var adapterView: ImageAdapterContract.View
+class MainPresenter(
+    private val view: MainContract.View,
+    private val imageData: ImageData,
+    private val adapterModel: ImageAdapterContract.Model,
+    private val adapterView: ImageAdapterContract.View
+) : MainContract.Presenter {
 
     override fun loadItems(context: Context, isClear: Boolean) {
         imageData.getSampleList(context, 10).let {

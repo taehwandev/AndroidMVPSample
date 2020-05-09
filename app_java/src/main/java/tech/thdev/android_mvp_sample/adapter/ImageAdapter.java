@@ -1,8 +1,9 @@
 package tech.thdev.android_mvp_sample.adapter;
 
-import android.content.Context;
-import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
@@ -17,14 +18,9 @@ import tech.thdev.android_mvp_sample.listener.OnItemClickListener;
 
 public class ImageAdapter extends RecyclerView.Adapter<ImageViewHolder> implements ImageAdapterContract.Model, ImageAdapterContract.View {
 
-    private Context context;
     private OnItemClickListener onItemClickListener;
 
     private ArrayList<ImageItem> imageItems;
-
-    public ImageAdapter(Context context) {
-        this.context = context;
-    }
 
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
@@ -52,14 +48,14 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageViewHolder> implemen
         return imageItems != null ? imageItems.size() : 0;
     }
 
+    @NonNull
     @Override
-    public ImageViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ImageViewHolder(context, parent, onItemClickListener);
+    public ImageViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        return new ImageViewHolder(parent, onItemClickListener);
     }
 
     @Override
-    public void onBindViewHolder(final ImageViewHolder holder, int position) {
-        if (holder == null) return;
+    public void onBindViewHolder(@NonNull ImageViewHolder holder, int position) {
         holder.onBind(imageItems.get(position), position);
     }
 }
