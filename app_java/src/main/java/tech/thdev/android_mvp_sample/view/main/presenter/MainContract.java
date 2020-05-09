@@ -8,7 +8,6 @@ import tech.thdev.android_mvp_sample.data.source.image.SampleImageRepository;
 /**
  * Created by tae-hwan on 12/22/16.
  */
-
 public interface MainContract {
 
     interface View {

@@ -1,11 +1,11 @@
 package tech.thdev.android_mvp_sample.adapter.holder;
 
-import android.content.Context;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -17,20 +17,16 @@ import tech.thdev.android_mvp_sample.util.ImageAsync;
 /**
  * Created by tae-hwan on 12/26/16.
  */
-
 public class ImageViewHolder extends RecyclerView.ViewHolder {
-
-    private Context context;
 
     private OnItemClickListener onItemClickListener;
 
     @BindView(R.id.img_view)
     ImageView imageView;
 
-    public ImageViewHolder(Context context, ViewGroup parent, OnItemClickListener onItemClickListener) {
-        super(LayoutInflater.from(context).inflate(R.layout.item_image, parent, false));
+    public ImageViewHolder(ViewGroup parent, OnItemClickListener onItemClickListener) {
+        super(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_image, parent, false));
 
-        this.context = context;
         this.onItemClickListener = onItemClickListener;
 
         ButterKnife.bind(this, itemView);
@@ -47,6 +43,6 @@ public class ImageViewHolder extends RecyclerView.ViewHolder {
             }
         });
 
-        new ImageAsync(context, imageView).execute(item.getImageRes());
+        new ImageAsync(imageView.getContext(), imageView).execute(item.getImageRes());
     }
 }
