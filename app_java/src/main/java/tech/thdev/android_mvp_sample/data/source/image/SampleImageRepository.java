@@ -11,7 +11,6 @@ import tech.thdev.android_mvp_sample.data.ImageItem;
  *
  * Memory cache / Local/Remote DataSource
  */
-
 public class SampleImageRepository implements SampleImageSource {
 
     private static SampleImageRepository sampleImageRepository;

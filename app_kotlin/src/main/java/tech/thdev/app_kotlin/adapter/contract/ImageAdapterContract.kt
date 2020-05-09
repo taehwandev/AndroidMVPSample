@@ -6,7 +6,6 @@ import java.util.*
 /**
  * Created by tae-hwan on 12/27/16.
  */
-
 interface ImageAdapterContract {
 
     interface View {
