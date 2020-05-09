@@ -1,9 +1,5 @@
 package tech.thdev.android_mvp_sample.util;
 
-/**
- * Created by tae-hwan on 12/26/16.
- */
-
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -12,6 +8,9 @@ import android.widget.ImageView;
 
 import java.lang.ref.WeakReference;
 
+/**
+ * Created by tae-hwan on 12/26/16.
+ */
 public class ImageAsync extends AsyncTask<Integer, Void, Bitmap> {
 
     private Context context;

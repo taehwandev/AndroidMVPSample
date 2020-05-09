@@ -10,18 +10,18 @@ import java.util.*
 /**
  * Created by tae-hwan on 12/23/16.
  */
+class MainPresenter(
+    private val view: MainContract.View,
+    private val imageData: SampleImageRepository,
+    private val adapterModel: ImageAdapterContract.Model,
+    private val adapterView: ImageAdapterContract.View
+) : MainContract.Presenter {
 
-class MainPresenter : MainContract.Presenter {
-
-    lateinit override var view: MainContract.View
-    lateinit override var imageData: SampleImageRepository
-
-    lateinit override var adapterModel: ImageAdapterContract.Model
-    override var adapterView: ImageAdapterContract.View? = null
-        set(value) {
-            field = value
-            field?.onClickFunc = { onClickListener(it) }
+    init {
+        adapterView.onClickFunc = {
+            onClickListener(it)
         }
+    }
 
     override fun loadItems(context: Context, isClear: Boolean) {
         imageData.getImages(context, 10, object : SampleImageSource.LoadImageCallback {
@@ -31,7 +31,7 @@ class MainPresenter : MainContract.Presenter {
                 }
 
                 adapterModel.addItems(list)
-                adapterView?.notifyAdapter()
+                adapterView.notifyAdapter()
             }
         })
     }

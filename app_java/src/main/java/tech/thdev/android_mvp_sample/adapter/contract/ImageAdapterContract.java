@@ -8,7 +8,6 @@ import tech.thdev.android_mvp_sample.listener.OnItemClickListener;
 /**
  * Created by tae-hwan on 12/27/16.
  */
-
 public interface ImageAdapterContract {
 
     interface View {

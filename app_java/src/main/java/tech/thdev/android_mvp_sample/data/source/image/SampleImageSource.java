@@ -9,7 +9,6 @@ import tech.thdev.android_mvp_sample.data.ImageItem;
 /**
  * Created by tae-hwan on 1/30/17.
  */
-
 public interface SampleImageSource {
 
     interface LoadImageCallback {

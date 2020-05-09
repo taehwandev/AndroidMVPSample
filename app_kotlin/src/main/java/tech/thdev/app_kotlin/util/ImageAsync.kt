@@ -10,14 +10,12 @@ import java.lang.ref.WeakReference
 /**
  * Created by tae-hwan on 12/26/16.
  */
+class ImageAsync(
+    private val context: Context,
+    imageView: ImageView?
+) : AsyncTask<Int, Void, Bitmap>() {
 
-class ImageAsync(val context: Context, imageView: ImageView?) : AsyncTask<Int, Void, Bitmap>() {
-
-    val imageViewReference: WeakReference<ImageView?>
-
-    init {
-        imageViewReference = WeakReference(imageView)
-    }
+    private val imageViewReference: WeakReference<ImageView?> = WeakReference(imageView)
 
     override fun doInBackground(vararg params: Int?): Bitmap? {
         val options = BitmapFactory.Options()

@@ -7,7 +7,6 @@ import java.util.*
 /**
  * Created by tae-hwan on 1/30/17.
  */
-
 interface SampleImageSource {
 
     interface LoadImageCallback {
