@@ -10,7 +10,6 @@ import tech.thdev.android_mvp_sample.data.SampleImageData;
 /**
  * Created by tae-hwan on 12/22/16.
  */
-
 public class MainPresenter implements MainContract.Presenter {
 
     private MainContract.View view;

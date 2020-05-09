@@ -1,14 +1,15 @@
 package tech.thdev.android_mvp_sample.adapter;
 
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -21,16 +22,9 @@ import tech.thdev.android_mvp_sample.data.ImageItem;
 /**
  * Created by tae-hwan on 10/23/16.
  */
-
 public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHolder> {
 
-    private Context mContext;
-
     private ArrayList<ImageItem> mImageItems;
-
-    public ImageAdapter(Context context) {
-        mContext = context;
-    }
 
     public void setImageItems(ArrayList<ImageItem> imageItems) {
         mImageItems = imageItems;
@@ -48,20 +42,20 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
         return mImageItems != null ? mImageItems.size() : 0;
     }
 
+    @NonNull
     @Override
-    public ImageViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ImageViewHolder(LayoutInflater.from(mContext).inflate(R.layout.item_image, parent, false));
+    public ImageViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        return new ImageViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_image, parent, false));
     }
 
     @Override
-    public void onBindViewHolder(final ImageViewHolder holder, int position) {
-        if (holder == null) return;
-
+    public void onBindViewHolder(
+            @NonNull ImageViewHolder holder, int position) {
         final ImageItem imageItem = mImageItems.get(position);
         new ImageAsync(holder.imageView).execute(imageItem.getImageRes());
     }
 
-    private class ImageAsync extends AsyncTask<Integer, Void, Bitmap> {
+    private static class ImageAsync extends AsyncTask<Integer, Void, Bitmap> {
 
         private final WeakReference<ImageView> imageViewReference;
 
@@ -73,7 +67,7 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
         protected Bitmap doInBackground(Integer... params) {
             BitmapFactory.Options options = new BitmapFactory.Options();
             options.inSampleSize = 2;
-            return BitmapFactory.decodeResource(mContext.getResources(), params[0], options);
+            return BitmapFactory.decodeResource(imageViewReference.get().getContext().getResources(), params[0], options);
         }
 
         @Override
@@ -89,7 +83,7 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
         }
     }
 
-    public class ImageViewHolder extends RecyclerView.ViewHolder {
+    public static class ImageViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.img_view)
         ImageView imageView;

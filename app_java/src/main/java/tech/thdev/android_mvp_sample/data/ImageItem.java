@@ -3,7 +3,6 @@ package tech.thdev.android_mvp_sample.data;
 /**
  * Created by tae-hwan on 10/23/16.
  */
-
 public class ImageItem {
 
     private int imageRes;

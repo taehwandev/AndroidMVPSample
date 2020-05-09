@@ -1,46 +1,52 @@
 package tech.thdev.app_kotlin
 
 import android.os.Bundle
-import android.support.design.widget.FloatingActionButton
-import android.support.design.widget.Snackbar
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
+import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.snackbar.Snackbar
 import tech.thdev.app_kotlin.adapter.ImageAdapter
 import tech.thdev.app_kotlin.data.ImageData
 import tech.thdev.app_kotlin.data.ImageItem
 import tech.thdev.app_kotlin.presenter.MainContract
 import tech.thdev.app_kotlin.presenter.MainPresenter
-import java.util.*
 
 class MainActivity : AppCompatActivity(), MainContract.View {
 
     private val recyclerView by lazy {
-        findViewById(R.id.recycler_view) as RecyclerView
+        findViewById<RecyclerView>(R.id.recycler_view)
     }
 
-    private var imageAdapter: ImageAdapter? = null
+    private val imageAdapter: ImageAdapter by lazy {
+        ImageAdapter()
+    }
 
     private lateinit var presenter: MainPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val toolbar = findViewById(R.id.toolbar) as Toolbar
+        val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
 
-        presenter = MainPresenter().apply {
-            view = this@MainActivity
+        presenter = MainPresenter(
+            view = this@MainActivity,
             imageData = ImageData
-        }
+        )
 
-        imageAdapter = ImageAdapter(this)
         recyclerView.adapter = imageAdapter
 
-        val fab = findViewById(R.id.fab) as FloatingActionButton
-        fab.setOnClickListener { view -> Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show() }
+        val fab = findViewById<FloatingActionButton>(R.id.fab)
+        fab.setOnClickListener { view ->
+            Snackbar.make(
+                view,
+                "Replace with your own action",
+                Snackbar.LENGTH_LONG
+            ).setAction("Action", null).show()
+        }
 
         presenter.loadItems(this, false)
     }

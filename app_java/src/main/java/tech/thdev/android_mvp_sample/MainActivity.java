@@ -1,15 +1,17 @@
 package tech.thdev.android_mvp_sample;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 
@@ -46,7 +48,7 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        imageAdapter = new ImageAdapter(this);
+        imageAdapter = new ImageAdapter();
         recyclerView.setAdapter(imageAdapter);
 
         mainPresenter.loadItems(this, false);
