@@ -7,7 +7,6 @@ import java.util.ArrayList;
 /**
  * Created by tae-hwan on 10/23/16.
  */
-
 public class SampleImageData {
 
     private SampleImageData() {

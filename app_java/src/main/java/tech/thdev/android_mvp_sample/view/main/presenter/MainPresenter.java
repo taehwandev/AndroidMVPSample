@@ -12,7 +12,6 @@ import tech.thdev.android_mvp_sample.listener.OnItemClickListener;
 /**
  * Created by tae-hwan on 12/22/16.
  */
-
 public class MainPresenter implements MainContract.Presenter, OnItemClickListener {
 
     private MainContract.View view;
